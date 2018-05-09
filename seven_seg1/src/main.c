@@ -95,26 +95,15 @@ int init_led(GPIO_TypeDef* gpio, int LED_pin){
 int main(){
 	//init_led(GPIOA, 5);
 	init_7seg(SEGgpio, SEGdin, SEGcs, SEGclk);
-/*
-	for (int i=0;i<1000;i++){
-		set_gpio(GPIOA, 5);
-		delay_without_interrupt(1000);
-		reset_gpio(GPIOA, 5);
-		delay_without_interrupt(1000);
+	int t = 0;
+	for (int i=2;i<=8;i++){
+		send_7seg(SEGgpio, SEGdin, SEGcs, SEGclk, i, 15);
 	}
-*/
-	int student_num[8] = {8, 9, 0, 1, 1, 4, 0, 15};
-	int student_num1[8] = {6, 3, 0, 1, 1, 4, 0, 15};
 	while(1){
 		send_7seg(SEGgpio, SEGdin, SEGcs, SEGclk, 0x9, 0xFF);
 		send_7seg(SEGgpio, SEGdin, SEGcs, SEGclk, 12, 0x01);
-		for (int i=1;i<=8;i++){
-			send_7seg(SEGgpio, SEGdin, SEGcs, SEGclk, i, student_num[i-1]);
-		}
-		delay_without_interrupt(1000);
-		for (int i=1;i<=8;i++){
-			send_7seg(SEGgpio, SEGdin, SEGcs, SEGclk, i, student_num1[i-1]);
-		}
+		send_7seg(SEGgpio, SEGdin, SEGcs, SEGclk, 1, t);
+		t = (t+1)%10;
 		delay_without_interrupt(1000);
 		/*
 		for (int i=0;i<5;i++){
