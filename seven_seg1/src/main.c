@@ -103,14 +103,25 @@ int main(){
 		delay_without_interrupt(1000);
 	}
 */
+	int student_num[8] = {8, 9, 0, 1, 1, 4, 0, 15};
+	int student_num1[8] = {6, 3, 0, 1, 1, 4, 0, 15};
 	while(1){
-		send_7seg(SEGgpio, SEGdin, SEGcs, SEGclk, 0x9, 0x01);
+		send_7seg(SEGgpio, SEGdin, SEGcs, SEGclk, 0x9, 0xFF);
 		send_7seg(SEGgpio, SEGdin, SEGcs, SEGclk, 12, 0x01);
-		send_7seg(SEGgpio, SEGdin, SEGcs, SEGclk, 0x1, 0x01);
+		for (int i=1;i<=8;i++){
+			send_7seg(SEGgpio, SEGdin, SEGcs, SEGclk, i, student_num[i-1]);
+		}
+		delay_without_interrupt(1000);
+		for (int i=1;i<=8;i++){
+			send_7seg(SEGgpio, SEGdin, SEGcs, SEGclk, i, student_num1[i-1]);
+		}
+		delay_without_interrupt(1000);
+		/*
 		for (int i=0;i<5;i++){
 			send_7seg(SEGgpio, SEGdin, SEGcs, SEGclk, 10, i*3);
 			delay_without_interrupt(1000);
 		}
+		*/
 	}
 	return 0;
 }
