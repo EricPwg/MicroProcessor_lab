@@ -131,7 +131,7 @@ void display7seg(int n){
 		return ;
 	}
 	for (int i=1;i<=8;i++){
-		if (n == 0)send_7seg(SEGgpio, SEGdin, SEGcs, SEGclk, i, n % 10); // send_7seg(SEGgpio, SEGdin, SEGcs, SEGclk, i, 15);
+		if (n == 0)send_7seg(SEGgpio, SEGdin, SEGcs, SEGclk, i, 15); // send_7seg(SEGgpio, SEGdin, SEGcs, SEGclk, i, 15);
 		else{
 			send_7seg(SEGgpio, SEGdin, SEGcs, SEGclk, i, n % 10);
 			n/=10;
@@ -150,7 +150,7 @@ int main(){
 	init_7seg(SEGgpio, SEGdin, SEGcs, SEGclk);
 	send_7seg(SEGgpio, SEGdin, SEGcs, SEGclk, 0x9, 0xFF);
 	send_7seg(SEGgpio, SEGdin, SEGcs, SEGclk, 12, 0x01);
-	send_7seg(SEGgpio, SEGdin, SEGcs, SEGclk, 10, 15);
+	send_7seg(SEGgpio, SEGdin, SEGcs, SEGclk, 10, 5);
 	/*
 	for (int i=2;i<=8;i++){
 		send_7seg(SEGgpio, SEGdin, SEGcs, SEGclk, i, 15);
@@ -159,26 +159,36 @@ int main(){
 	int t = 15;
 	int cur_num = 0;
 	int last_num = 0;
-	display7seg(12);
+	//display7seg(35);
 	delay_without_interrupt(1000);
-	/*
+	int cur = 1;
+	int pre = 0;
+/*
 	while(1){
-
+		display7seg(cur);
+		int t = cur+pre;
+		pre = cur;
+		cur = t;
+		delay_without_interrupt(1000);
+	}
+*/
+	while(1){
 		int pt = 0;
-		while(read_gpio(BUTTON_gpio, BUTTON_pin) == 1){
+		while(read_gpio(BUTTON_gpio, BUTTON_pin) == 0){
 			int pos_cnt = 0;
 			for (int b = 0;b<debounce_cycle;b++){
 				if (read_gpio(BUTTON_gpio, BUTTON_pin) == 0) pos_cnt++;
-				//delay_without_interrupt_2(1);
+				//delay_without_interrupt(1);
 			}
 
 			if (pos_cnt > debounce_threshold) pt++;
-			display7seg(pt);
+			//display7seg(pt);
 		}
-		display7seg(pt);
-		delay_without_interrupt(1000);
-		continue;
-		if (pt > 1000) cur_num = 0;
+		//display7seg(pt);
+		//if (pt >0 )
+		//delay_without_interrupt(1000);
+		//continue;
+		if (pt > 800) cur_num = 0;
 		else if (pt > 0){
 			if (cur_num == 0){
 				cur_num = 1;
@@ -193,6 +203,6 @@ int main(){
 
 		display7seg(cur_num);
 	}
-	*/
+
 	return 0;
 }

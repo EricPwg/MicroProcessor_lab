@@ -96,13 +96,14 @@ int main(){
 	//init_led(GPIOA, 5);
 	init_7seg(SEGgpio, SEGdin, SEGcs, SEGclk);
 	int t = 0;
-	for (int i=2;i<=8;i++){
+	for (int i=1;i<=8;i++){
 		send_7seg(SEGgpio, SEGdin, SEGcs, SEGclk, i, 15);
 	}
+	send_7seg(SEGgpio, SEGdin, SEGcs, SEGclk, 10, 20);
 	while(1){
 		send_7seg(SEGgpio, SEGdin, SEGcs, SEGclk, 0x9, 0xFF);
 		send_7seg(SEGgpio, SEGdin, SEGcs, SEGclk, 12, 0x01);
-		send_7seg(SEGgpio, SEGdin, SEGcs, SEGclk, 1, t);
+		send_7seg(SEGgpio, SEGdin, SEGcs, SEGclk, 2, t);
 		t = (t+1)%10;
 		delay_without_interrupt(1000);
 		/*
