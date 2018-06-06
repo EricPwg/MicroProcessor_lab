@@ -35,10 +35,12 @@ void reset_gpio(GPIO_TypeDef* gpio, int pin)
 
 void SysTick_Handler(){
 	if(SysTick->CTRL & SysTick_CTRL_COUNTFLAG_Msk){
+		//COL_gpio -> OTYPER &= ~(1 << (COL_pin+now_col));
 		reset_push(COL_gpio, now_col+COL_pin);
 		now_col = (now_col+1)%4;
 		set_push(COL_gpio, now_col+COL_pin);
-		//display_number(SEG_gpio, DIN_pin, CS_pin, CLK_pin, now_col, 5);
+		//COL_gpio -> OTYPER |= (1 << (COL_pin+now_col));
+		//display_number(SEG_gpio, DIN_pin, CS_pin, CLK_pin, now_col, 1);
 	}
 }
 
@@ -126,14 +128,18 @@ const int keypad[4][4] = {
 
 void EXTIKeypadHandler(int r){
 	int nowKey = keypad[r][(now_col) %4];
+	//display_number(SEG_gpio, DIN_pin, CS_pin, CLK_pin, nowKey*100+keyValue, 4);
 	// A simple debounce
 	if(nowKey == keyValue ){
+		//display_number(SEG_gpio, DIN_pin, CS_pin, CLK_pin, nowKey, 4);
 		keyCnt++;
 	}
 	else{
-		keyCnt = 0;
+		//display_number(SEG_gpio, DIN_pin, CS_pin, CLK_pin, nowKey, 2);
+		keyCnt--;
 	}
 	keyValue = nowKey;
+	if(keyCnt <= 0) keyCnt = 0;
 	if(keyCnt >= 5){
 		keyCnt = 5;
 		display_number(SEG_gpio, DIN_pin, CS_pin, CLK_pin, keyValue, 2);
@@ -375,16 +381,17 @@ int main(){
 
 
 	//Set 10MHz 0.001s interrupt
-	SystemClock_Config_interrupt(10,10000);
+	SystemClock_Config_interrupt(1,10000);
 	//Init Interrupts
 	EXTI_Setup();
 
 	while(1){
+		/*
 		SysTick_Handler();
 		EXTI3_IRQHandler();
 		EXTI4_IRQHandler();
 		EXTI9_5_IRQHandler();
-
+*/
 
 	}
 

@@ -6,14 +6,14 @@
 #include "timer.h"
 
 //Define pins for 7seg
-#define SEG_gpio GPIOA //PC port
+#define SEG_gpio GPIOC //PC port
 #define DIN_pin 5//顯示的資料_PC5
 #define CS_pin 6//資料讀取開關 PC6
-#define CLK_pin 7//取樣 PC8
+#define CLK_pin 8//取樣 PC8
 
 //Define pins for keypad
-#define COL_gpio GPIOC
-#define COL_pin 0	//6 7 8 9
+#define COL_gpio GPIOA
+#define COL_pin 6	//6 7 8 9
 #define ROW_gpio GPIOB
 #define ROW_pin 3	//3 4 5 6
 

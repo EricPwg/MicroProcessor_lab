@@ -30,10 +30,10 @@ endif
 all: Lab5.2.elf
 
 # Tool invocations
-Lab5.2.elf: $(OBJS) $(USER_OBJS) D:\class\大三下\微處理機\偉晉的code\新增資料夾\Lab5.2\LinkerScript.ld
+Lab5.2.elf: $(OBJS) $(USER_OBJS) D:\MicroProcessor_lab\Lab5.2\LinkerScript.ld
 	@echo 'Building target: $@'
 	@echo 'Invoking: MCU GCC Linker'
-	arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -T"D:\class\大三下\微處理機\偉晉的code\新增資料夾\Lab5.2\LinkerScript.ld" -Wl,-Map=output.map -Wl,--gc-sections -o "Lab5.2.elf" @"objects.list" $(USER_OBJS) $(LIBS) -lm
+	arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -T"D:\MicroProcessor_lab\Lab5.2\LinkerScript.ld" -Wl,-Map=output.map -Wl,--gc-sections -o "Lab5.2.elf" @"objects.list" $(USER_OBJS) $(LIBS) -lm
 	@echo 'Finished building target: $@'
 	@echo ' '
 	$(MAKE) --no-print-directory post-build

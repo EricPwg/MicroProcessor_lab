@@ -21,7 +21,7 @@
 
 //Define pins for led(default use on-board led PA5)
 #define LED_gpio GPIOA
-#define LED_pin 9
+#define LED_pin 5
 
 //Define pins for button (default use  on-board button PC13)
 #define BUTTON_gpio GPIOC

@@ -566,13 +566,13 @@ OUTPUT(Lab5.1.elf elf32-littlearm)
  .debug_macro   0x0001be95      0x124 src/main.o
  .debug_macro   0x0001bfb9       0x10 src/main.o
 
-.debug_line     0x00000000      0x553
- .debug_line    0x00000000      0x4da src/main.o
- .debug_line    0x000004da       0x79 startup/startup_stm32.o
+.debug_line     0x00000000      0x53a
+ .debug_line    0x00000000      0x4c1 src/main.o
+ .debug_line    0x000004c1       0x79 startup/startup_stm32.o
 
-.debug_str      0x00000000    0x9a79a
- .debug_str     0x00000000    0x9a79a src/main.o
-                              0x9a951 (size before relaxing)
+.debug_str      0x00000000    0x9a781
+ .debug_str     0x00000000    0x9a781 src/main.o
+                              0x9a938 (size before relaxing)
 
 .comment        0x00000000       0x7f
  .comment       0x00000000       0x7f src/main.o

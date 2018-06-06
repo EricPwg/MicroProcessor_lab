@@ -12,7 +12,7 @@
 
 //Define pins for keypad
 #define COL_gpio GPIOA
-#define COL_pin 5 //5 6 7 8
+#define COL_pin 6 //5 6 7 8
 #define ROW_gpio GPIOB
 #define ROW_pin 3 //3 4 5 6
 

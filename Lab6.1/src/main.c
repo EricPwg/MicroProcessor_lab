@@ -7,7 +7,7 @@
 
 //Define pins for led(default use on-board led PA5)
 #define LED_gpio GPIOA
-#define LED_pin 9
+#define LED_pin 5
 
 //Define pins for button (default use  on-board button PC13)
 #define BUTTON_gpio GPIOC
@@ -33,6 +33,7 @@ int init_led(GPIO_TypeDef* gpio, int led_pin){
 	{
 		RCC->AHB2ENR |= RCC_AHB2ENR_GPIOBEN;
 	}
+
 	else
 	{
 		//Error! Add other cases to suit other GPIO pins
